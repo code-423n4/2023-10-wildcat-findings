@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "zhanmingjing",
+  "risk": "2",
+  "title": "math underflow will give out unexpected output, and cause more gas ",
+  "issueId": 11,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/11"
+}
