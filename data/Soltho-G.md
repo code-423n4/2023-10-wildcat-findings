@@ -44,22 +44,40 @@ And for the `getMarketParameters` getter that requires those predefined values,w
   uint16 immutable reserveRatioBipsMarketParams;
   uint32 immutable delinquencyGracePeriodMarketParams;
 
+// if the temporary values are set, return them. Else return the preset ones
+  function getMarketParameters() external view returns (MarketParameters memory parameters) {
+        if (_tmpMarketParameters.asset != address(0)) {
+            parameters.asset = _tmpMarketParameters.asset;
+            parameters.namePrefix = _tmpMarketParameters.namePrefix;
+            parameters.symbolPrefix = _tmpMarketParameters.symbolPrefix;
+            parameters.borrower = borrower;
+            parameters.controller = address(this);
+            parameters.feeRecipient = _tmpMarketParameters.feeRecipient;
+            parameters.sentinel = sentinel;
+            parameters.maxTotalSupply = _tmpMarketParameters.maxTotalSupply;
+            parameters.protocolFeeBips = _tmpMarketParameters.protocolFeeBips;
+            parameters.annualInterestBips = _tmpMarketParameters.annualInterestBips;
+            parameters.delinquencyFeeBips = _tmpMarketParameters.delinquencyFeeBips;
+            parameters.withdrawalBatchDuration = _tmpMarketParameters.withdrawalBatchDuration;
+            parameters.reserveRatioBips = _tmpMarketParameters.reserveRatioBips;
+            parameters.delinquencyGracePeriod = _tmpMarketParameters.delinquencyGracePeriod;
+        } else {
+            parameters.asset = assetMarketParams;
+            parameters.namePrefix = namePrefixMarketParams;
+            parameters.symbolPrefix = symbolPrefixMarketParams;
+            parameters.borrower = borrower;
+            parameters.controller = address(this);
+            parameters.feeRecipient = feeRecipientMarketParams;
+            parameters.sentinel = sentinel;
+            parameters.maxTotalSupply = maxTotalSupplyMarketParams;
+            parameters.protocolFeeBips = protocolFeeBipsMarketParams;
+            parameters.annualInterestBips = annualInterestBipsMarketParams;
+            parameters.delinquencyFeeBips = delinquencyFeeBipsMarketParams;
+            parameters.withdrawalBatchDuration = withdrawalBatchDurationMarketParams;
+            parameters.reserveRatioBips = reserveRatioBipsMarketParams;
+            parameters.delinquencyGracePeriod = delinquencyGracePeriodMarketParams;
+        }
+    }
 
- function getMarketParameters() external view returns (MarketParameters memory parameters) {
-    parameters.asset = assetMarketParams ;
-    parameters.namePrefix = namePrefixMarketParams;
-    parameters.symbolPrefix = symbolPrefixMarketParams;
-    parameters.borrower = borrower;
-    parameters.controller = address(this);
-    parameters.feeRecipient = feeRecipientMarketParams;
-    parameters.sentinel = sentinel;
-    parameters.maxTotalSupply = maxTotalSupplyMarketParams;
-    parameters.protocolFeeBips = protocolFeeBipsMarketParams;
-    parameters.annualInterestBips = annualInterestBipsMarketParams;
-    parameters.delinquencyFeeBips = delinquencyFeeBipsMarketParams;
-    parameters.withdrawalBatchDuration = withdrawalBatchDurationMarketParams;
-    parameters.reserveRatioBips = reserveRatioBipsMarketParams ;
-    parameters.delinquencyGracePeriod = delinquencyGracePeriodMarketParams;
-  }
 ```
 Note that this will result in a more expensive deployment but can save a lot of gas in the long run.
