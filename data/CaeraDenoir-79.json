@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "CaeraDenoir",
+  "risk": "3",
+  "title": "Borrowers are able to withdraw more collateral than the reserve ratio allows them to",
+  "issueId": 79,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/79"
+}
