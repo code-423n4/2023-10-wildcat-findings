@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "caventa",
+  "risk": "2",
+  "title": "Not considering expiry could lead to inaccurate liquidity calculations",
+  "issueId": 96,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/96"
+}
