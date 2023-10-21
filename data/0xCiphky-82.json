@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xCiphky",
+  "risk": "3",
+  "title": "Create escrow parameters are mixed up, giving the sanctioned user the borrower role",
+  "issueId": 82,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/82"
+}
