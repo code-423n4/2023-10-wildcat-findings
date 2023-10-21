@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0x3b",
+  "risk": "2",
+  "title": "The Borrower may prevent a lender from being nuked in order to avoid becoming delinquent.",
+  "issueId": 87,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/87"
+}
