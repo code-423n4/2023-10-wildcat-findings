@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "cryptothemex",
+  "risk": "3",
+  "title": "WildcatMarketToken vulnerable to race condition",
+  "issueId": 99,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/99"
+}
