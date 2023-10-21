@@ -1,4 +1,4 @@
-LOW-1 Use of `balanceOf(address(this))` for accounting purposes
+### LOW-1 Use of `balanceOf(address(this))` for accounting purposes
 
 `totalAssets()` function uses IERC20(asset).balanceOf(address(this)) which is a really bad practice.
 
