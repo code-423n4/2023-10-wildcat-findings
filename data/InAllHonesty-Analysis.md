@@ -33,8 +33,6 @@ The codebase is well-structured and follows best practices for smart contract de
 
 <img src="https://user-images.githubusercontent.com/95440897/277175194-7f25912d-b4ce-432c-9552-ab91a278d270.png" alt="A nice sketch representing contracts and functions">
 
-IMAGE LINK HERE.
-
 ### Architecture Recommendations
 
 The overall architecture is great. I was surprised to see critical protocol variables `withdrawableFees`, `borrowableAssets`, `availableLiquidity` based on `IERC20(asset).balanceOf(address(this))` which can obviously be inflated by anyone. The project does this because transferring the underlying token to the market contract is the only way a `borrower` can repay his debt. I advise creating a function that can be used by the `borrower` to repay his debt and change the way `totalAssets()` is derived by tracking inflows and outflows from the authorized parties.
@@ -66,6 +64,8 @@ Create a repay method that can be called only by the lender to avoid using the c
 ### Conclusion
 
 Overall Wildcat is a unique and innovative project that attempts to bring undercollateralized lending into the web3 space. It was a fun project to audit. I sincerely hope this shift from `trustless` to `trustful` will succeed proving everyone that trust between two parties still has a place in web3.
+
+
 
 
 
