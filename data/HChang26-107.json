@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "HChang26",
+  "risk": "3",
+  "title": "Incorrect calculation in `closeMarket()` results in unpaid lenders",
+  "issueId": 107,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/107"
+}
