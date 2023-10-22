@@ -31,6 +31,8 @@ Borrowers are considered delinquent if they fail to maintain the reserve ratio. 
 
 The codebase is well-structured and follows best practices for smart contract development. There are some comments attached that go hand in hand with the great documentation in facilitating a great understanding of the project. It would have been better if the protocol provided some form of flow charts, which could have been very helpful to someone with a limited time or background in auditing this type of protocols. I took the liberty of drafting one to get a better grasp of the project.
 
+<img src="https://user-images.githubusercontent.com/95440897/277175194-7f25912d-b4ce-432c-9552-ab91a278d270.png" alt="A nice sketch representing contracts and functions">
+
 IMAGE LINK HERE.
 
 ### Architecture Recommendations
@@ -64,6 +66,8 @@ Create a repay method that can be called only by the lender to avoid using the c
 ### Conclusion
 
 Overall Wildcat is a unique and innovative project that attempts to bring undercollateralized lending into the web3 space. It was a fun project to audit. I sincerely hope this shift from `trustless` to `trustful` will succeed proving everyone that trust between two parties still has a place in web3.
+
+
 
 
 
