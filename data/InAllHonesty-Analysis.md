@@ -66,12 +66,5 @@ Create a repay method that can be called only by the lender to avoid using the c
 Overall Wildcat is a unique and innovative project that attempts to bring undercollateralized lending into the web3 space. It was a fun project to audit. I sincerely hope this shift from `trustless` to `trustful` will succeed proving everyone that trust between two parties still has a place in web3.
 
 
-
-
-
-
-
-
-
 ### Time spent:
 48 hours
