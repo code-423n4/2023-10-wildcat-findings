@@ -15,3 +15,31 @@ This design choice originates from the lack of a specific repay method for the b
 Those two variables have a significant influence on the flow of the borrower/lender relation. A `MaximumDelinquencyGracePeriod` of 356 days gives too much leniency to the borrower, rendering the delinquency penalty useless, while a `MinimumDelinquencyGracePeriod` of 0 will make lenders game the system in order to have the delinquency penalty active 100% of the time. 
 
 **Recommendation**: Set a hard limit of let's say 1 day for the `MinimumDelinquencyGracePeriod` and 7-10 days for the `MaximumDelinquencyGracePeriod`
+
+### LOW-3 Given that an Annual Interest = 0 is a special situation happening after a market gets closed using the `closeMarket` function, being able to call `setAnnualInterestBips(0)` shouldn't be possible.
+
+Put this in `WildcatMarketConfig.t.sol`:
+```
+  function test_annualInterestBipsZero() external returns (uint256) {
+    assertEq(market.annualInterestBips(), parameters.annualInterestBips);
+    vm.prank(parameters.controller);
+    market.setAnnualInterestBips(0);
+    assertEq(market.annualInterestBips(), 0);
+  }
+```
+
+Recommendation: in `WildcatMarketConfig.sol`
+```diff
+    function setAnnualInterestBips(uint16 _annualInterestBips) public onlyController nonReentrant {
+++      if (_annualInterestBips == 0) revert InterestZero();
+        MarketState memory state = _getUpdatedState();
+
+        if (_annualInterestBips > BIP) {
+            revert InterestRateTooHigh();
+        }
+
+        state.annualInterestBips = _annualInterestBips;
+        _writeState(state);
+        emit AnnualInterestBipsUpdated(_annualInterestBips);
+    }
+```
