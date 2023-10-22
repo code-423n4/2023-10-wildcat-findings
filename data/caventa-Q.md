@@ -81,3 +81,12 @@ function _blockAccount(MarketState memory state, address accountAddress) interna
     }
   }
 ```
+
+3.
+
+Stunning reversal unblocks an account but does not revert its balance to what they were before being blocked. 
+
+Suggestion:
+
+a) Store the balance somewhere before sending it to escrow when blocking
+b) When Stunning reversal, transfer the same balance from the escrow
