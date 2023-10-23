@@ -1,0 +1,3 @@
+In the _getAccountWithRole function, if the if condition of L204 is judged to be false, it is also possible to make `account.approve = AuthRole.WithdrawOnly. Otherwise, it may increase the operation of withdrawing money, although the user can set it through the updateLenderAuthorization function to set but obviously not user-friendly.
+
+https://github.com/code-423n4/2023-10-wildcat/blob/main/src/market/WildcatMarketBase.sol#L197-L208
