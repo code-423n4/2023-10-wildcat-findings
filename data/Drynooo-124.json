@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Drynooo",
+  "risk": "2",
+  "title": "Market parameters may be able to exit the bounds defined by the controller which deployed it.",
+  "issueId": 124,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/124"
+}
