@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "max10afternoon",
+  "risk": "2",
+  "title": "Broken invariant: anyone can withdraw from the market",
+  "issueId": 146,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/146"
+}
