@@ -90,3 +90,11 @@ Suggestion:
 
 a) Store the balance somewhere before sending it to escrow when blocking
 b) When Stunning reversal, transfer the same balance from the escrow
+
+4.
+
+In https://code4rena.com/contests/2023-10-the-wildcat-protocol#top, it mentioned that
+
+"Lenders can retrieve their assets from these escrow contracts in the event that they are ever removed from the oracle"
+
+However, there is no code to allow the lender to retrieve back their token from the escrow once they are unblocked
