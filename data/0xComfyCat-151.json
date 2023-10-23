@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xComfyCat",
+  "risk": "2",
+  "title": "Unable to update market maxTotalSupply after the market has been deployed",
+  "issueId": 151,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/151"
+}
