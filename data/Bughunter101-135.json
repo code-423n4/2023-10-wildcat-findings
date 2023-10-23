@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Bughunter101",
+  "risk": "2",
+  "title": "`WildcatMarketToken.approve()` has in-front attack problem",
+  "issueId": 135,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/135"
+}
