@@ -283,3 +283,47 @@ File: MathUtils.sol
 39:     }
 ```
 The `MathUtils.calculateLinearInterestFromBips()` function can be deleted to save gas and optimize the code. Don't forget to update the references to the function in the code by replacing them with the `FeeMath.calculateLinearInterestFromBips()` function instead of `MathUtils.calculateLinearInterestFromBips() function`.
+
+## GAS10: The function `MathUtils._applyWithdrawalBatchPayment()` can be optimized
+```diff
+File: WildcatMarketBase.sol
+  function _applyWithdrawalBatchPayment(
+    WithdrawalBatch memory batch,
+    MarketState memory state,
+    uint32 expiry,
+    uint256 availableLiquidity
+  ) internal {
++   uint104 scaledAmountOwed = batch.scaledTotalAmount - batch.scaledAmountBurned;
++   // Do nothing if batch is already paid
++   if (scaledAmountOwed == 0) {
++     return;
++   }
+    uint104 scaledAvailableLiquidity = state.scaleAmount(availableLiquidity).toUint104();
+-   uint104 scaledAmountOwed = batch.scaledTotalAmount - batch.scaledAmountBurned;
+-   // Do nothing if batch is already paid
+-   if (scaledAmountOwed == 0) {
+-     return;
+-   }
+    uint104 scaledAmountBurned = uint104(MathUtils.min(scaledAvailableLiquidity, scaledAmountOwed));
+    uint128 normalizedAmountPaid = state.normalizeAmount(scaledAmountBurned).toUint128();
+
+
+    batch.scaledAmountBurned += scaledAmountBurned;
+    batch.normalizedAmountPaid += normalizedAmountPaid;
+    state.scaledPendingWithdrawals -= scaledAmountBurned;
+
+
+    // Update normalizedUnclaimedWithdrawals so the tokens are only accessible for withdrawals.
+    state.normalizedUnclaimedWithdrawals += normalizedAmountPaid;
+
+
+    // Burn market tokens to stop interest accrual upon withdrawal payment.
+    state.scaledTotalSupply -= scaledAmountBurned;
+
+
+    // Emit transfer for external trackers to indicate burn.
+    emit Transfer(address(this), address(0), normalizedAmountPaid);
+    emit WithdrawalBatchPayment(expiry, scaledAmountBurned, normalizedAmountPaid);
+  }
+```
+`Overall gas change: -5380 (-0.006%)`
