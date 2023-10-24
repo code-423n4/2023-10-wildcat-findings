@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xSwahili",
+  "risk": "2",
+  "title": "Attempts to lodge funds into escrow accounts will always fails since the WildcatMarketWithdrawals contracts calls create escrow with wrong parameters",
+  "issueId": 222,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/222"
+}
