@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Eigenvectors",
+  "risk": "3",
+  "title": "A main invariant can be broken by updating the annualInterestBips",
+  "issueId": 202,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/202"
+}
