@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "ggg_ttt_hhh",
+  "risk": "2",
+  "title": "Can set an annual interest rate that falls outside the controller-specific limits.",
+  "issueId": 213,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/213"
+}
