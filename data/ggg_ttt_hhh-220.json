@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "ggg_ttt_hhh",
+  "risk": "2",
+  "title": "When the withdrawalBatchDuration is set to 0, duplicate expiry values can be inserted into the unpaidBatches of _withdrawalData.",
+  "issueId": 220,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/220"
+}
