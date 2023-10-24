@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "bdmcbri",
+  "risk": "2",
+  "title": "Missing access check leads to unauthorized withdrawal of market tokens",
+  "issueId": 255,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/255"
+}
