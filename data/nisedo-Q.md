@@ -49,3 +49,28 @@ File: ReentrancyGuard.sol
 65      _reentrancyGuard = _ENTERED;
 66    }
 ```
+
+## QA4: Incorrect Documentation on `WildcatMarketConfig.nukeFromOrbit()` Access Control
+
+### Description
+The documentation for the function `WildcatMarketConfig.nukeFromOrbit()` claims that the function will revert if the caller is not the sentinel.
+
+> [Reverts if: the caller is not the sentinel.](https://wildcat-protocol.gitbook.io/wildcat/technical-deep-dive/component-overview/wildcat-market-overview/wildcatmarketconfig.sol#nukefromorbit)
+
+However, there is no check to ensure that the caller is the sentinel in the code. This can lead to potential misuse or misunderstanding of the function's access control, as the function relies on the result of `IWildcatSanctionsSentinel(sentinel).isSanctioned(borrower, accountAddress)` to determine behavior, rather than directly validating the caller's identity.
+
+```solidity
+File: WildcatMarketConfig.sol
+  function nukeFromOrbit(address accountAddress) external nonReentrant {
+    if (!IWildcatSanctionsSentinel(sentinel).isSanctioned(borrower, accountAddress)) {
+      revert BadLaunchCode();
+    }
+    MarketState memory state = _getUpdatedState();
+    _blockAccount(state, accountAddress);
+    _writeState(state);
+  }
+```
+
+### Recommendations
+1. Update the function `WildcatMarketConfig.nukeFromOrbit()` to include an explicit check to verify that the caller is indeed the sentinel. This can be done using a simple `if` or `require` statement.
+2. Update the documentation to accurately reflect the function's behavior.
