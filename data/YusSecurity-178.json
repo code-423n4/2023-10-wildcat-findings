@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "YusSecurity",
+  "risk": "2",
+  "title": "Lender can achieve higher APR than configured via daily compounding",
+  "issueId": 178,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/178"
+}
