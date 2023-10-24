@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "DarkTower",
+  "risk": "2",
+  "title": "Calling _blockaccount function in the same block as deposit function causes unexpected behaviour and locked funds",
+  "issueId": 209,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/209"
+}
