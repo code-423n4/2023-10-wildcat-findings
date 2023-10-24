@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xbepresent",
+  "risk": "3",
+  "title": "Borrower can call `setAnnualInterestBips()` even when the market is closed causing the protocol continues to acumulate fees, affecting withdrawals",
+  "issueId": 223,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/223"
+}
