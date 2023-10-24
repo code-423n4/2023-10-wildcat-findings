@@ -22,4 +22,4 @@ line 93: https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f0
 ```
  for (uint256 i = 0; i < count; i++) {
 ```
-change 'i++' to '++i' to save some gas
+change 'i++' to '++i' to save some gas. Also no need to instantiate i to 0 as it will already have a value of 0 by default.
