@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "aariiif",
+  "risk": "3",
+  "title": "`ExecuteWithdrawal` allows over-withdrawal, risking balance manipulation and discrepancies.",
+  "issueId": 249,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/249"
+}
