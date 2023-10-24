@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xbepresent",
+  "risk": "3",
+  "title": "Once the sanctioned lender is being unsanctioned, the lender can execute withdrawals without waiting the withdrawals queue process",
+  "issueId": 230,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/230"
+}
