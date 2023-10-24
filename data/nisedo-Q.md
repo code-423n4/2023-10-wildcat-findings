@@ -31,3 +31,11 @@ File: WildcatSanctionsEscrow.sol
 - import {IChainalysisSanctionsList} from "./interfaces/IChainalysisSanctionsList.sol";
 - import {SanctionsList} from "./libraries/Chainalysis.sol";
 ```
+
+## QA2: Remove todo comments
+```solidity
+File: FIFOQueue.sol
+10: // @todo - make array tightly packed for gas efficiency with multiple reads/writes
+11: //         also make a memory version of the array with (nextIndex, startIndex, storageSlot)
+12: //         so that multiple storage reads aren't required for tx's using multiple functions
+```
