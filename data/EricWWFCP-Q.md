@@ -14,5 +14,12 @@ Three issues with the following function in src/WildcatArchController.sol
     for (uint256 i = 0; i < count; i++) {
       arr[i] = _borrowers.at(start + i);
     }
-  }
+  }    for (uint256 i = 0; i < count; i++) {
 ```
+
+2) src/WildcatArchController.sol
+line 93: https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/WildcatArchController.sol#L93C1-L93C42
+```
+ for (uint256 i = 0; i < count; i++) {
+```
+change 'i++' to '++i' to save some gas
