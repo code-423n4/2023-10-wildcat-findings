@@ -74,3 +74,30 @@ File: WildcatMarketConfig.sol
 ### Recommendations
 1. Update the function `WildcatMarketConfig.nukeFromOrbit()` to include an explicit check to verify that the caller is indeed the sentinel. This can be done using a simple `if` or `require` statement.
 2. Update the documentation to accurately reflect the function's behavior.
+
+## QA5: Lack of Access Control on `WildcatMarket.collectFees()`
+
+### Description
+The function `collectFees` allows for the collection of accrued protocol fees. However, there is no access control implemented on this function, meaning any external actor can call it. This presents a security risk as potentially malicious or unauthorized users can trigger the fee collection, leading to unexpected behavior or potential loss of funds.
+
+```solidity
+File: WildcatMarket.sol
+  function collectFees() external nonReentrant {
+    MarketState memory state = _getUpdatedState();
+    if (state.accruedProtocolFees == 0) {
+      revert NullFeeAmount();
+    }
+    uint128 withdrawableFees = state.withdrawableProtocolFees(totalAssets());
+    if (withdrawableFees == 0) {
+      revert InsufficientReservesForFeeWithdrawal();
+    }
+    state.accruedProtocolFees -= withdrawableFees;
+    _writeState(state);
+    asset.safeTransfer(feeRecipient, withdrawableFees);
+    emit FeesCollected(withdrawableFees);
+  }
+```
+
+### Recommendations
+1. Implement access control on the `collectFees` function. Ideally, only authorized entities (such as the protocol's admin or designated fee collector) should be allowed to collect fees.
+2. Use a modifier like `onlyAuthorized` or a similar naming convention to ensure that only specific addresses or roles can call this function.
