@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "3docSec",
+  "risk": "2",
+  "title": "Queued withdrawal execution fails when not preceded by an adequate number of \"processUnpaidWithdrawalBatch\" calls",
+  "issueId": 194,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/194"
+}
