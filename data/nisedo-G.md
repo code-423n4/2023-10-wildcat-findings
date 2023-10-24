@@ -252,3 +252,34 @@ File: WildcatMarketWithdrawals.sol
   }
 ```
 `gas: -413 (-0.070%)`
+
+## GAS9: The function `MathUtils.calculateLinearInterestFromBips()` is duplicated and can be deleted
+The function `calculateLinearInterestFromBips()` is duplicated in the following files in `FeeMath.sol` and `MathUtils.sol`:
+```solidity
+File: FeeMath.sol
+20:     function calculateLinearInterestFromBips(uint256 rateBip, uint256 timeDelta)
+21:         internal
+22:         pure
+23:         returns (uint256 result)
+24:     {
+25:         uint256 rate = rateBip.bipToRay();
+26:         uint256 accumulatedInterestRay = rate * timeDelta;
+27:         unchecked {
+28:             return accumulatedInterestRay / SECONDS_IN_365_DAYS;
+29:         }
+30:     }
+```
+```solidity
+File: MathUtils.sol
+30:     function calculateLinearInterestFromBips(
+31:         uint256 rateBip,
+32:         uint256 timeDelta
+33:     ) internal pure returns (uint256 result) {
+34:         uint256 rate = rateBip.bipToRay();
+35:         uint256 accumulatedInterestRay = rate * timeDelta;
+36:         unchecked {
+37:             return accumulatedInterestRay / SECONDS_IN_365_DAYS;
+38:         }
+39:     }
+```
+The `MathUtils.calculateLinearInterestFromBips()` function can be deleted to save gas and optimize the code. Don't forget to update the references to the function in the code by replacing them with the `FeeMath.calculateLinearInterestFromBips()` function instead of `MathUtils.calculateLinearInterestFromBips() function`.
