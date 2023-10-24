@@ -20,3 +20,7 @@ https://github.com/code-423n4/2023-10-wildcat/blob/main/src/market/WildcatMarket
 
 3.`_transfer` to zero address should be checked 
 https://github.com/code-423n4/2023-10-wildcat/blob/main/src/market/WildcatMarketToken.sol#L64#L83
+
+4.should use WithdrawOnly instead of Null
+https://github.com/code-423n4/2023-10-wildcat/blob/main/src/market/WildcatMarketConfig.sol#L98
+Since WithdrawOnly role is open , anyone can invoke `updateLenderAuthorization` to get at least `WithdrawOnly` role , after lender be removed from block list user have to invoke `updateLenderAuthorization` to get a `WithdrawOnly` role . For user convenience and to save gas fees, it is essential to directly set it as the `WithdrawOnly ` role 
