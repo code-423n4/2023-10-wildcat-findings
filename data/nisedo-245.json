@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "nisedo",
+  "risk": "2",
+  "title": "Missing Reentrancy Guard and Access Control in `WildcatSanctionsEscrow.releaseEscrow()`",
+  "issueId": 245,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/245"
+}
