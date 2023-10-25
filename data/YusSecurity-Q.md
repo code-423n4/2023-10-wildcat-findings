@@ -18,3 +18,9 @@ if (_maxTotalSupply < state.totalSupply()) {
 ```
 
 This check can inconvenience borrowers who wish to gradually reduce their market supply by preventing them from going below the current market supply, resulting in increased manual maintenance efforts.
+
+## [QA-2] Constraints on market parameters applied only at creation
+
+The protocol's constraints on market parameters are solely enforced during market creation, specifically within the `deployMarket()` function.
+
+However, subsequent changes to market parameters made directly through functions like `WildcatMarketConfig#setMaxTotalSupply()`, `WildcatMarketConfig#setAnnualInterestBips()`, and `WildcatMarketConfig#setReserveRatioBips()` do not undergo any constraint checks.
