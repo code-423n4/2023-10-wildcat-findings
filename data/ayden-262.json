@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "ayden",
+  "risk": "2",
+  "title": "When processing unpaid withdrawals, the FIFO principle was not followed resulted in the individuals who made withdrawals first not receiving priority in payment",
+  "issueId": 262,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/262"
+}
