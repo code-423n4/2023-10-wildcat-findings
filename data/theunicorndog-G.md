@@ -19,6 +19,11 @@ These can be safely rewritten in the following manner for same functionality wit
    }
 ```
 
+Reasons for gas saving
+- ++i is cheaper than i++
+- unchecked is cheaper in gas
+- i != count is cheaper than i < count
+
 Affected functions are listed below:
 - src/WildcatArchController.sol:WildcatArchController.[getRegisteredBorrowers](https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/WildcatArchController.sol#L93-L95)
 - src/WildcatArchController.sol:WildcatArchController.[getRegisteredControllerFactories](https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/WildcatArchController.sol#L136-L138)
