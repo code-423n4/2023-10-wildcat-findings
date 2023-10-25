@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "osmanozdemir1",
+  "risk": "2",
+  "title": "The total supply of the market tokens does not decrease after transfer to zero address",
+  "issueId": 375,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/375"
+}
