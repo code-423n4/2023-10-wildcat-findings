@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "dethera",
+  "risk": "2",
+  "title": "Underflow error in the function `bytes32ToString` from the file `StringQuery.sol`",
+  "issueId": 368,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/368"
+}
