@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Mike_Bello90",
+  "risk": "3",
+  "title": "Vulnerability: Markets can't be Closed Cause the closeMarket function can be called only by the Market Controller but the Controller lacks a function to Close the Market / Contracts: WildcatMarketController",
+  "issueId": 371,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/371"
+}
