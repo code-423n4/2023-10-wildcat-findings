@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "deth",
+  "risk": "3",
+  "title": "WildcatMarket.sol - If an asset token is used that contains blacklisting logic, the lender can force the borrower into delinquency.",
+  "issueId": 305,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/305"
+}
