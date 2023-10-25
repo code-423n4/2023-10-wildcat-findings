@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "TrungOre",
+  "risk": "2",
+  "title": "Accounts can prevent funds from being sent to escrow when being listed in the `ChainalysisSanctionsList`",
+  "issueId": 356,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/356"
+}
