@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "almurhasan",
+  "risk": "3",
+  "title": "Lenders with DepositAndWithdraw role can’t burn tokens or make withdrawal request in wildcatmarketwithdrawals contract",
+  "issueId": 283,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/283"
+}
