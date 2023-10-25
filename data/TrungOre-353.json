@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "TrungOre",
+  "risk": "3",
+  "title": "Lenders can't claim their tokens from escrow due to incorrect implementation in `WildcatMarketWithdrawals.sol`",
+  "issueId": 353,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/353"
+}
