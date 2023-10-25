@@ -32,3 +32,7 @@ if (_maxTotalSupply < state.totalSupply()) {
 ```
 
 This check can inconvenience borrowers who wish to gradually reduce their market supply by preventing them from going below the current market supply, resulting in increased manual maintenance efforts.
+
+## [QA-4] `EscrowReleased` event may be emitted, even when an attempt to release escrow fails.
+
+In the implementation of `WildcatSanctionsEscrow#releaseEscrow()`, the `IERC20(asset).transfer(account, amount)` function is used to release escrowed funds. The code does not check the return value, which means that the `EscrowReleased` event may be emitted even if the transfer of escrowed funds fails (e.g., when `transfer()` returns `false`).
