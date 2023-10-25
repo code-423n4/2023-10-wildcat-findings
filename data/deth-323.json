@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "deth",
+  "risk": "3",
+  "title": "FeeMath.sol#updateTimeDelinquentAndGetPenaltyTime - Use of previous `state` value can lead to delinquency fees not being added to the total debts of the borrower",
+  "issueId": 323,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/323"
+}
