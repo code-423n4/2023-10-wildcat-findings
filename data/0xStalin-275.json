@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xStalin",
+  "risk": "2",
+  "title": "Mixing units between the approvals and transfers functions in the MarketToken will lead to spenders being able to spend less MarketTokens than the amount they really were allowed to",
+  "issueId": 275,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/275"
+}
