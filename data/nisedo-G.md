@@ -1,9 +1,12 @@
+## Note to the Judge:
+All gas optimization estimations presented in this report have been determined using the `forge snapshot` feature. This tool allows for a precise analysis of gas consumption before and after the proposed changes, ensuring the accuracy of the savings mentioned.
+
 ## GAS1: State variables that are used multiple times in a function should be cached in stack variables 
+By caching state variables in stack variables, we reduce the need to frequently access storage, thereby saving gas.
 ```diff
 File: WildcatSanctionsEscrow.sol
   function releaseEscrow() public override {
     if (!canReleaseEscrow()) revert CanNotReleaseEscrow();
-
 
     uint256 amount = balance();
     
@@ -21,6 +24,7 @@ File: WildcatSanctionsEscrow.sol
 
 
 ## GAS2: Pack struct
+Reordering the structure of the `MarketState` ensures that the struct variables are packed efficiently, minimizing storage costs.
 ```solidity
 File: MarketState.sol
 	struct MarketState {
@@ -43,7 +47,8 @@ File: MarketState.sol
 	}
 ```
 
-## GAS3: closeMarket() function can be optimized
+## GAS3: `WildcatMarket.closeMarket()` function can be optimized
+By moving condition checks up in the execution flow, we save on computational steps and improve the gas efficiency of the `closeMarket()` function.
 ```diff
 File: WildcatMarket.sol
   function closeMarket() external onlyController nonReentrant {
@@ -72,7 +77,8 @@ File: WildcatMarket.sol
 ```
 `Overall gas change: -1524 (-0.002%)`
 
-## GAS4: setAnnualInterestBips() function can be optimized
+## GAS4: `WildcatMarketConfig.setAnnualInterestBips()` function can be optimized
+By moving condition checks up in the execution flow, we save on computational steps and improve the gas efficiency of the `setAnnualInterestBips()` function.
 ```solidity
 File: WildcatMarketConfig.sol
   function setAnnualInterestBips(uint16 _annualInterestBips) public onlyController nonReentrant {
@@ -92,7 +98,8 @@ File: WildcatMarketConfig.sol
 ```
 `Overall gas change: -7567 (-0.009%)`
 
-## GAS6: stunningReversal() function can be optimized
+## GAS6: `WildcatMarketConfig.stunningReversal()` function can be optimized
+By moving condition checks up in the execution flow, we save on computational steps and improve the gas efficiency of the `stunningReversal()` function.
 ```diff
 File: WildcatMarketConfig.sol
   function stunningReversal(address accountAddress) external nonReentrant {
@@ -118,7 +125,8 @@ File: WildcatMarketConfig.sol
   }
 ```
 
-## GAS7: queueWithdrawal() function can be optimized
+## GAS7: `WildcatMarketWithdrawals.queueWithdrawal()` function can be optimized
+By moving condition checks up in the execution flow, we save on computational steps and improve the gas efficiency of the `queueWithdrawal()` function.
 ```diff
 File: WildcatMarketWithdrawals.sol
   function queueWithdrawal(uint256 amount) external nonReentrant {
@@ -183,7 +191,8 @@ File: WildcatMarketWithdrawals.sol
 ```
 `Overall gas change: -9258 (-0.011%)`
 
-## GAS8: executeWithdrawal() function can be optimized
+## GAS8: `WildcatMarketWithdrawals.executeWithdrawal()` function can be optimized
+By moving condition checks up in the execution flow, we save on computational steps and improve the gas efficiency of the `executeWithdrawal()` function.
 ```diff
 File: WildcatMarketWithdrawals.sol
   function executeWithdrawal(
@@ -254,7 +263,7 @@ File: WildcatMarketWithdrawals.sol
 `gas: -413 (-0.070%)`
 
 ## GAS9: The function `MathUtils.calculateLinearInterestFromBips()` is duplicated and can be deleted
-The function `calculateLinearInterestFromBips()` is duplicated in the following files in `FeeMath.sol` and `MathUtils.sol`:
+The function `calculateLinearInterestFromBips()` is duplicated in `FeeMath.sol` and `MathUtils.sol`. Removing the duplicated `calculateLinearInterestFromBips()` function in `MathUtils.sol` and using the one in `FeeMath.sol` eliminates redundancy and saves gas.
 ```solidity
 File: FeeMath.sol
 20:     function calculateLinearInterestFromBips(uint256 rateBip, uint256 timeDelta)
@@ -285,6 +294,7 @@ File: MathUtils.sol
 The `MathUtils.calculateLinearInterestFromBips()` function can be deleted to save gas and optimize the code. Don't forget to update the references to the function in the code by replacing them with the `FeeMath.calculateLinearInterestFromBips()` function instead of `MathUtils.calculateLinearInterestFromBips() function`.
 
 ## GAS10: The function `MathUtils._applyWithdrawalBatchPayment()` can be optimized
+By moving condition checks up in the execution flow, we save on computational steps and improve the gas efficiency of the `_applyWithdrawalBatchPayment()` function.
 ```diff
 File: WildcatMarketBase.sol
   function _applyWithdrawalBatchPayment(
