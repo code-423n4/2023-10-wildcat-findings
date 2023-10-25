@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "AM",
+  "risk": "3",
+  "title": "Escrow contract can be hijacked and funds can be stolen or blocked",
+  "issueId": 288,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/288"
+}
