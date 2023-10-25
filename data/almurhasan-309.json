@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "almurhasan",
+  "risk": "2",
+  "title": "Approved users (approved by market erc20 token holders) can’t withdraw in  WildcatMarketWithdrawals contract.",
+  "issueId": 309,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/309"
+}
