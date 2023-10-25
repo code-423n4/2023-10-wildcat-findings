@@ -29,6 +29,8 @@ The 3rd parameter of createEscrow function should be asset. See interface IWildc
 
 However, the 3rd parameter of createEscrow code in WildcatMarketBase#_blockAccount is address(this).
 
+Unlike asset the current contract is not an ERC20 token.
+
 Suggestion: Change WildcatMarketBase#_blockAccount
 
 ```diff
