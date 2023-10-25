@@ -77,71 +77,55 @@ function getEscrowAddress(
             )
           )
         )
-      );
-  }
-```
-https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/WildcatSanctionsSentinel.sol#L65-L85
+```        
 
-### [G-4] Move the array length check to the beginning of the function.
-if we move the check for the length of _withdrawalData.unpaidBatches to the beginning of the function, then if the length is 0, then there will be an immediate revert, and no gas will be wasted on reading state from storage. 
+### [G-4] Immediately set the correct account status when calling stunningReversal()
+
+This way we will avoid checking account status for AuthRole.Null role  every time we call the _getAccountWithRole() function and check the status only when we call the stunningReversal function. This will reduce gas consumption when calling the _getAccountWithRole function.
+
 ```diff
- function closeMarket() external onlyController nonReentrant {
-+    if (_withdrawalData.unpaidBatches.length() > 0) {
-+      revert CloseMarketWithUnpaidWithdrawals();
-+   }
-    MarketState memory state = _getUpdatedState();
-    state.annualInterestBips = 0;
-    state.isClosed = true;
-    state.reserveRatioBips = 0;
--    if (_withdrawalData.unpaidBatches.length() > 0) {
--      revert CloseMarketWithUnpaidWithdrawals();
--   }
-    uint256 currentlyHeld = totalAssets();
-    uint256 totalDebts = state.totalDebts();
-    if (currentlyHeld < totalDebts) {
-      // Transfer remaining debts from borrower
-      asset.safeTransferFrom(borrower, address(this), totalDebts - currentlyHeld);
-    } else if (currentlyHeld > totalDebts) {
-      // Transfer excess assets to borrower
-      asset.safeTransfer(borrower, currentlyHeld - totalDebts);
-    }
-    _writeState(state);
-    emit MarketClosed(block.timestamp);
-  }
-```
-https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/market/WildcatMarket.sol#L142-L160
 
-
-### [G-5] Unnecessary IF in setReserveRatioBips()
-There is no need to check that _reserveRatioBips > initialReserveRatioBips because we know this since we got to this point in the code. Gass diffs show that optimized code takes gas less. 
- test_setReserveRatioBips_InsufficientReservesForNewLiquidityRatio()  359349  ->  359327 
- test_setReserveRatioBips_InsufficientReservesForOldLiquidityRatio()  605989  ->  605980 
- test_setReserveRatioBips_NotController(uint16)  the same
- test_setReserveRatioBips_ReserveRatioBipsTooHigh the same
-```diff
- function setReserveRatioBips(uint16 _reserveRatioBips) public onlyController nonReentrant {
-    if (_reserveRatioBips > BIP) {
-      revert ReserveRatioBipsTooHigh();
-    }
-
-    MarketState memory state = _getUpdatedState();
-
-    uint256 initialReserveRatioBips = state.reserveRatioBips;
-
-    if (_reserveRatioBips < initialReserveRatioBips) {
-      if (state.liquidityRequired() > totalAssets()) {
-        revert InsufficientReservesForOldLiquidityRatio();
-      }
-    }
-    state.reserveRatioBips = _reserveRatioBips;
--    if (_reserveRatioBips > initialReserveRatioBips) {
-      if (state.liquidityRequired() > totalAssets()) {
-        revert InsufficientReservesForNewLiquidityRatio();
-      }
+// WildcatMarketBase.sol
+  function _getAccountWithRole(
+    address accountAddress,
+    AuthRole requiredRole
+  ) internal returns (Account memory account) {
+    account = _getAccount(accountAddress);
+-    // If account role is null, see if it is authorized on controller.
+-    if (account.approval == AuthRole.Null) {
+-      if (IWildcatMarketController(controller).isAuthorizedLender(accountAddress)) {
+-        account.approval = AuthRole.DepositAndWithdraw;
+-        emit AuthorizationStatusUpdated(accountAddress, AuthRole.DepositAndWithdraw);
+-      }
 -    }
-    _writeState(state);
-    emit ReserveRatioBipsUpdated(_reserveRatioBips);
+    // If account role is insufficient, revert.
+    if (uint256(account.approval) < uint256(requiredRole)) {
+      revert NotApprovedLender();
+    }
   }
+  
+// WildcatMarketConfig.sol
+ function stunningReversal(address accountAddress) external nonReentrant {
+    Account memory account = _accounts[accountAddress];
+    if (account.approval != AuthRole.Blocked) {
+      revert AccountNotBlocked();
+    }
 
+    if (IWildcatSanctionsSentinel(sentinel).isSanctioned(borrower, accountAddress)) {
+      revert NotReversedOrStunning();
+    }
+
+-    account.approval = AuthRole.Null;
++     if (IWildcatMarketController(controller).isAuthorizedLender(accountAddress)) {
++        account.approval = AuthRole.DepositAndWithdraw;
++        emit AuthorizationStatusUpdated(accountAddress, AuthRole.DepositAndWithdraw);
++      }
+-    emit AuthorizationStatusUpdated(accountAddress, account.approval);
+
+    _accounts[accountAddress] = account;
+  }
 ```
-https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/market/WildcatMarketConfig.sol#L171C4-L192
+https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/market/WildcatMarketConfig.sol#L88-L102
+https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/market/WildcatMarketBase.sol#L197-L213
+
+        
