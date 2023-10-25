@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "deth",
+  "risk": "3",
+  "title": "WildcatMarket.sol#collectFees - `collectFees` won't put the borrower in delinquency even if it should.",
+  "issueId": 308,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/308"
+}
