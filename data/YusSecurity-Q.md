@@ -54,3 +54,20 @@ In the implementation of `WildcatSanctionsEscrow#releaseEscrow()`, the `IERC20(a
 
 **Recommendation:**
 Use `safeTransfer()` instead of `transfer()` since it would revert in case `transfer()` returns `false` thus preventing incorrect emission of the `EscrowReleased` event.
+
+## [QA-5] Incomplete NatSpec 
+
+The code lacks NatSpec documentation in multiple areas, which is crucial for better code comprehension and maintenance. To enhance code readability, transparency, and maintainability, it is essential to add NatSpec documentation to functions with significant logic, providing clear explanations of their behavior, inputs, and outputs.
+
+Examples:
+- `WildcatMarketWithdrawals`
+  - `getWithdrawalBatch()`
+  - `getAvailableWithdrawalAmount()`
+  - `processUnpaidWithdrawalBatch()`
+- `WildcatMarketController`
+  - `computeMarketAddress()`
+  - `resetReserveRatio()`
+- `WildcatSanctionsEscrow`
+
+**Recommendation:**
+Add NatSpec documentation to public/external functions which contain important logic.
