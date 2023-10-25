@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Madalad",
+  "risk": "2",
+  "title": "Return value of assembly `create2` not checked",
+  "issueId": 319,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/319"
+}
