@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Vagner",
+  "risk": "3",
+  "title": "Markets can't be closed since `closeMarket` can't be called by anyone",
+  "issueId": 304,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/304"
+}
