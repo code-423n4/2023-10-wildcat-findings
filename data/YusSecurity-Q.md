@@ -4,7 +4,8 @@ The existing repayment mechanism requires borrowers to transfer funds directly t
 
 This design choice was made to enable third-party addresses to repay the loan during force majeure events.
 
-**Recommendation:**
+### Recommendation
+
 A more effective approach would involve creating a function allowing anyone to repay the debt, capped at the `MarketState#totalDebts()`, with excess funds automatically returned to the sender.
 
 ## [QA-2] Constraints on market parameters applied only at creation
@@ -40,7 +41,14 @@ This check can inconvenience borrowers who wish to gradually reduce their market
 **Recommendation:**
 Remove the mentioned check to enable borrowers to update the total supply as outlined in the whitepaper or update the whitepaper if the check is the intended behavior.
 
-## [QA-4] `EscrowReleased` event may be emitted, even when an attempt to release escrow fails.
+## [QA-4] Unused BoolUtils functions
+
+The `or()` and `xor()` functions in the `BoolUtils` library are never used.
+
+**Recommendation:**
+Remove any unused internal library functions which would otherwise become part of the deployed contract and thus incur unnecessary extra gas gost.
+
+## [QA-5] `EscrowReleased` event may be emitted, even when an attempt to release escrow fails.
 
 In the implementation of `WildcatSanctionsEscrow#releaseEscrow()`, the `IERC20(asset).transfer(account, amount)` function is used to release escrowed funds. The code does not check the return value, which means that the `EscrowReleased` event may be emitted even if the transfer of escrowed funds fails (e.g., when `transfer()` returns `false`).
 
