@@ -4,6 +4,7 @@ The existing repayment mechanism requires borrowers to transfer funds directly t
 
 This design choice was made to enable third-party addresses to repay the loan during force majeure events.
 
+**Recommendation:**
 A more effective approach would involve creating a function allowing anyone to repay the debt, capped at the `MarketState#totalDebts()`, with excess funds automatically returned to the sender.
 
 ## [QA-2] Constraints on market parameters applied only at creation
@@ -11,6 +12,9 @@ A more effective approach would involve creating a function allowing anyone to r
 The protocol's constraints on market parameters are solely enforced during market creation, specifically within the `deployMarket()` function.
 
 However, subsequent changes to market parameters made directly through functions like `WildcatMarketConfig#setMaxTotalSupply()`, `WildcatMarketConfig#setAnnualInterestBips()`, and `WildcatMarketConfig#setReserveRatioBips()` do not undergo any constraint checks.
+
+**Recommendation:**
+Ensure that the appropriate constraints are enforced when directly updating market parameters through the `WildcatMarket` contract.
 
 ## [QA-3] Borrowers cannot reduce market capacity below the current total supply
 
@@ -33,6 +37,12 @@ if (_maxTotalSupply < state.totalSupply()) {
 
 This check can inconvenience borrowers who wish to gradually reduce their market supply by preventing them from going below the current market supply, resulting in increased manual maintenance efforts.
 
+**Recommendation:**
+Remove the mentioned check to enable borrowers to update the total supply as outlined in the whitepaper or update the whitepaper if the check is the intended behavior.
+
 ## [QA-4] `EscrowReleased` event may be emitted, even when an attempt to release escrow fails.
 
 In the implementation of `WildcatSanctionsEscrow#releaseEscrow()`, the `IERC20(asset).transfer(account, amount)` function is used to release escrowed funds. The code does not check the return value, which means that the `EscrowReleased` event may be emitted even if the transfer of escrowed funds fails (e.g., when `transfer()` returns `false`).
+
+**Recommendation:**
+Use `safeTransfer()` instead of `transfer()` since it would revert in case `transfer()` returns `false` thus preventing incorrect emission of the `EscrowReleased` event.
