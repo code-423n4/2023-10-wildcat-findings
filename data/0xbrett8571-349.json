@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Usage of fixed-width uint104 and uint112 types risks integer overflow.",
+  "issueId": 349,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/349"
+}
