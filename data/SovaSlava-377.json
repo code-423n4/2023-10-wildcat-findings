@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "SovaSlava",
+  "risk": "2",
+  "title": "FeeRecipient address may be locked in the token contract",
+  "issueId": 377,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/377"
+}
