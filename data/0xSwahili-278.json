@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xSwahili",
+  "risk": "2",
+  "title": "False accounting when blocking account with balance",
+  "issueId": 278,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/278"
+}
