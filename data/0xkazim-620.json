@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xkazim",
+  "risk": "3",
+  "title": "calling `closeMarket` is not possible because of the `onlyController` modifier",
+  "issueId": 620,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/620"
+}
