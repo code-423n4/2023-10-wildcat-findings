@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xvj",
+  "risk": "3",
+  "title": "spender can front-run approve function to steal tokens from owner",
+  "issueId": 429,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/429"
+}
