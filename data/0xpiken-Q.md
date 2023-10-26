@@ -1,4 +1,4 @@
-## [01] [`processUnpaidWithdrawalBatch()`]([https://github.com/code-423n4/2023-10-ens/blob/main/contracts/ERC20MultiDelegate.sol#L57-L63](https://github.com/code-423n4/2023-10-wildcat/blob/main/src/market/WildcatMarketWithdrawals.sol#L190-L214)) can be be reverted due to lack of available liquidity
+## [01] [`processUnpaidWithdrawalBatch()`]([https://github.com/code-423n4/2023-10-ens/blob/main/contracts/ERC20MultiDelegate.sol#L57-L63](https://github.com/code-423n4/2023-10-wildcat/blob/main/src/market/WildcatMarketWithdrawals.sol#L190-L214)) could be be reverted due to lack of available liquidity
 Use `satSub` instead:
 ```diff
   function processUnpaidWithdrawalBatch() external nonReentrant {
