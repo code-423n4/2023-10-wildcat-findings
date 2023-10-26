@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "devival",
+  "risk": "3",
+  "title": "Rebase (underlying ERC20) tokens would break the property of supply and lead to a loss of funds",
+  "issueId": 606,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/606"
+}
