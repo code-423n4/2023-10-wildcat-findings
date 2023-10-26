@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "gizzy",
+  "risk": "3",
+  "title": "market can not be closed because it contains onlyController modifier but the controller does not have any function to close market.",
+  "issueId": 466,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/466"
+}
