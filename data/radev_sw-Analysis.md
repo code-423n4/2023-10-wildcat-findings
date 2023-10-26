@@ -7,10 +7,9 @@
 | 1   | Notes during Wildcat Auditing (Mechanism review)                              |
 | 2   | Architecture overview (Codebase Explanation, Examples Executions & Scenarios) |
 | 3   | Code Audit Approach                                                           |
-| 4   | Potential Attack Vectors Discussed during the Audit                           |
-| 5   | Codebase Complexity and Codebase Quality                                      |
-| 6   | Centralization Risks                                                          |
-| 7   | Systemic Risks                                                                |
+| 4   | Codebase Complexity and Codebase Quality                                      |
+| 5   | Centralization Risks                                                          |
+| 6   | Systemic Risks                                                                |
 
 ---
 
@@ -65,9 +64,37 @@
 **Overview Architecture -> https://prnt.sc/GISTKqpwap2K**
 *Credits: "0xkazim"*
 
+## All Possible Actions of Borrower:
+  1. Launching A New Market
+  2. Sourcing Deposits
+  3. Borrowing From A Market
+     - borrower call `borrow(uint256 amount)`, after that within `borrow()` function -> `_getUpdatedState()` -> `check if the requested amount is lower than borrowable amount in the market (if not, then revert)` -> `_writeState()` -> `transfer the requested amount of underlying assets to the borrower`
+     - Remember that the capacity you set for your market only dictates the maximum amount that you are able to source from lenders, and that your reserve ratio will dictate the amount of the supply that you cannot remove from a market. If you have created a market with a maximum capacity of 1,000,000 USDC and a reserve ratio of 20%, this means you can borrow up to 800,000 USDC provided that the market is 'full' (i.e. supply is equal to capacity). In the event where the supply to this market is 600,000 USDC, you can only borrow up to 480,000 USDC.
+     - **Attack Ideas:**
+       - Can borrower borrow more that `borrowable amount` without enter the grace period
+  4. Repaying A Market
+     - borrower just transfer amount of underlying asset to market ans then should call `updateState()`
+  5. Reducing APR
+  6. Altering Capacity
+  7. Closing A Market
+  8. Removal From The ArchController
+
+## All Possible Actions of Lender:
+  1. Deposits
+  2. Withdrawals
+     - The Unclaimed Withdrawals Pool
+     - Claiming
+     - Expired Claims and The Withdrawal Queue
+
+## The Sentinel Actions:
+1. Lender Gets Sanctioned
+2. Borrower Gets Sanctioned
+
+
+
 ### Structs Parameters Explanation:
 
-#### MarketState
+#### MarketState Struct
 - sponsor comment: scaledPendingWithdrawals is tracked because borrowers are obligated to honour 100% of pending withdrawals and the reserve ratio for the rest of the total supply to avoid delinquency.
 ```jsx
 struct MarketState {
@@ -100,14 +127,19 @@ struct MarketState {
 }
 ```
 
+###
+
 ### Functions Flow Explanation:
 
-#### WildcatMarketBase.sol
+#### WildcatMarketBase.sol (Base contract for Wildcat markets)
 
-##### `_getUpdatedState()` Function Flow:
+##### `_getUpdatedState()` function flow:
 
 1. **_getUpdatedState()** function performs the following actions:
 
+   - Returns cached MarketState after accruing interest and delinquency / protocol fees and processing expired withdrawal batch, if any.
+   - Used by functions that make additional changes to `state`.
+   
    - Apply pending interest, delinquency fees and protocol fees to the state and process the pending withdrawal batch if one exists and has expired (accruing interest and delinquency / protocol fees and processing expired withdrawal batch, if any).
    - Used by functions that make additional changes to `state`.
    - Returned `state` does not match `_state` if interest is accrued.
@@ -115,7 +147,7 @@ struct MarketState {
 
 2. The function follows a specific logic sequence:
 
-    - It first checks if there is a pending expired withdrawal batch by calling `state.hasPendingExpiredBatch()` to verify whether `pendingWithdrawalExpiry` is greater than 0 and less than the current `block.timestamp`.
+    - It first checks if there is a pending expired withdrawal batch by calling `state.hasPendingExpiredBatch()` verify whether `pendingWithdrawalExpiry` is greater than 0 and less than the current `block.timestamp`.
 
     - If this condition holds true, the function proceeds to check if `expiry != state.lastInterestAccruedTimestamp`. This check ensures that interest is only accrued if sufficient time has passed since the last update. It also considers cases where `withdrawalBatchDuration` is set to 0.
 
@@ -125,7 +157,74 @@ struct MarketState {
 
 3. Finally, the function checks if `block.timestamp` differs from `state.lastInterestAccruedTimestamp`. If this condition is met, it once again calls `updateScaleFactorAndFees()` to apply interest and fees accrued since the last update (either due to an expiry or a previous transaction).
 
-##### 
+##### `_writeState()` function flow:
+- Writes the cached MarketState to storage and emits an event. Also set if the market is in delinquent state.
+- Used at the end of all functions which modify `state`.
+
+#### `_getAccount` function flow:
+- return the account by his address (the account is struct of scaledBalance and AuthRole)
+
+#### `_blockAccount` function flow:
+- Block an account and transfer its balance of market tokens to an escrow contract.
+- If the account is already blocked, this function does nothing.
+- During function execution the `scaleBalance` of account is set to 0, `approval` to `Blocked` and the `_accounts[escrow].scaledBalance` is increased by the scaledBalance of account in current market state.
+
+#### `_getAccountWithRole` function flow:
+- Retrieve an account from storage and assert that it has at least the required role.
+- If the account's role is not set, queries the controller to determine if it is an approved lender; if it is, its role is initialized to DepositAndWithdraw.
+
+#### `coverageLiquidity` function flow:
+- Returns the amount of underlying assets the borrower is obligated to maintain in the market to avoid delinquency.
+- the function call `liquidityRequired()` function which basically determine how much liquidity must be available within the market to cover pending withdrawals, required reserves, protocol fees, and unclaimed withdrawals
+
+#### `scaleFactor()` Function:
+- Returns the scale factor (in ray) used to convert scaled balances to normalized balances.
+
+#### `totalAssets()` Function:
+- Total balance in underlying asset.
+
+#### `borrowableAssets()` function flow:
+- Returns the amount of underlying assets the borrower is allowed to borrow. This is the balance of underlying assets minus: pending (unpaid) withdrawals, paid withdrawals, reserve ratio times the portion of the supply not pending withdrawal, protocol fees
+- The function basically call `borrowableAssets()` with `totalAssets()` view function as a parameter
+
+#### `accruedProtocolFees()` function flow:
+- Returns the amount of protocol fees (in underlying asset amount) that have accrued and are pending withdrawal.
+
+#### `previousState()` function flow:
+- Returns the state of the market as of the last update.
+
+#### `currentState()` function flow:
+- Return the state the market would have at the current block after applying interest and fees accrued since the last update and processing the pending withdrawal batch if it is expired.
+
+#### `scaledTotalSupply()` function flow:
+- Returns the scaled total supply the vaut would have at the current block after applying interest and fees accrued since the last update and burning market tokens for the pending withdrawal batch if it is expired.
+- `return currentState().scaledTotalSupply;`
+
+#### `scaledBalanceOf()` function flow:
+- Returns the scaled balance of `account`
+
+#### `withdrawableProtocolFees` function flow:
+- Returns the amount of protocol fees that are currently withdrawable by the fee recipient.
+- The function basically calls the `MarketState#withdrawableProtocolFees()` with current market state. The `MarketState#withdrawableProtocolFees()` subtract the `normalizedUnclaimedWithdrawals` from `totalAssets` and return -> `MathUtils.min(totalAvailableAssets, state.accruedProtocolFees)`.   
+
+
+#### `effectiveBorrowerAPR()` function flow:
+- Calculate effective interest rate currently paid by borrower.
+- Borrower pays base APR, protocol fee (on base APR) and delinquency fee (if delinquent beyond grace period).
+
+#### `effectiveLenderAPR()` function flow:
+- Calculate effective interest rate currently earned by lenders. Lenders earn base APR and delinquency fee (if delinquent beyond grace period)
+
+#### `_calculateCurrentState()` function flow:
+- Calculate the current state, applying fees and interest accrued since the last state update as well as the effects of withdrawal batch expiry on the market state.
+- Identical to _getUpdatedState() except it does not modify storage or emit events.
+- Returns expired batch data, if any, so queries against batches have access to the most recent data.
+
+#### `_applyWithdrawalBatchPayment()` function flow:
+- Process withdrawal payment, burning market tokens and reserving underlying assets so they are only available for withdrawals.
+
+---
+
 
 ---
 
@@ -180,13 +279,10 @@ Protocol Assumptions:
 - In a protocol with multiple user roles, are there checks in place to ensure that functions designed for specific roles cannot be accessed by unauthorized roles?
 - How should borrowers deposit assets to fulfill lender withdrawal requests? Is there a dedicated function for this, or do borrowers need to transfer assets to the market manually?
 
----
-
-# 4. Potential Attack Vectors Discussed during the Audit
 
 ---
 
-# 5. Codebase Complexity and Codebase Quality
+# 4. Codebase Complexity and Codebase Quality
 
 ## Codebase Complexity Analysis for WildCat Protocol
 
@@ -256,12 +352,12 @@ In summary, the WildCat Protocol codebase demonstrates good structural clarity, 
 
 ---
 
-# 6. Centralization Risks
+# 5. Centralization Risks
 **The protocol gives the borrower too much access and control over the lenders. It's also a very sneaky design that the deployer of a specific contract "WildcatMarketController" has control over all lenders for markets with possibly different borrowers (tuned borrower in specific market cannot have control over lenders in that market, only the deployer of WildcatMarketController contract) . Be afair and definitely write this in the decumentation.**
 
 ---
 
-# 7. Systemic Risks 
+# 6. Systemic Risks 
 
 The WildCat Protocol, like any financial system, has its fair share of potential risks that could affect its stability and the safety of users funds. So bellow I write possible risks.
 
@@ -297,7 +393,5 @@ The WildCat Protocol, like any financial system, has its fair share of potential
    - DeFi protocols often interact with each other. If one protocol has problems, it can affect others in a chain reaction.
    - Safety Measures: Doing thorough checks on connected protocols, having ways to pause operations, and having plans for emergencies can minimize risks from interconnectedness.
 
-
-
 ### Time spent:
-20 hours
+25 hours
