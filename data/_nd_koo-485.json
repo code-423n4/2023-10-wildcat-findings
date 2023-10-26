@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "_nd_koo",
+  "risk": "3",
+  "title": "Borrower cannot close market because of unimplemented function",
+  "issueId": 485,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/485"
+}
