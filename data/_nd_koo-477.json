@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "_nd_koo",
+  "risk": "3",
+  "title": "Borrower can sweep the market regardless of ReserveRatio when set lender as self address",
+  "issueId": 477,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/477"
+}
