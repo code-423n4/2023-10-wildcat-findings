@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Toshii",
+  "risk": "2",
+  "title": "In certain cases the delinquency time for a borrower will not be decremented, even if they are no longer delinquent",
+  "issueId": 607,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/607"
+}
