@@ -1,0 +1,1 @@
+### Function `calculateLinearInterestFromBips` is duplicated in `FeeMath` and `MathUtils` and used from both in `FeeMath`.
