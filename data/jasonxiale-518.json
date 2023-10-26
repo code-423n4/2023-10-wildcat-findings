@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "jasonxiale",
+  "risk": "2",
+  "title": "Malicious lender might by-pass being sanctioned by abusing `WildcatMarketToken.transfer`",
+  "issueId": 518,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/518"
+}
