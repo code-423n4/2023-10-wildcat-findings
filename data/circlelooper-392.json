@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "circlelooper",
+  "risk": "3",
+  "title": "Should remove account's scaledBalance from market's scaledTotalSupply when an account is blocked",
+  "issueId": 392,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/392"
+}
