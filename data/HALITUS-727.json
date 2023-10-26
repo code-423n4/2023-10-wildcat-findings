@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "HALITUS",
+  "risk": "2",
+  "title": "Borrower cannot change market capacity (max total supply) after creating a market",
+  "issueId": 727,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/727"
+}
