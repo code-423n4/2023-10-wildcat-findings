@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "lfzkoala",
+  "risk": "2",
+  "title": "Lender's Authorization Manipulation because of lacking access control. ",
+  "issueId": 409,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/409"
+}
