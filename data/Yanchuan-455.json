@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Yanchuan",
+  "risk": "3",
+  "title": "The method for calculating the protocol fee is incorrect when there are unfully paid withdrawals.",
+  "issueId": 455,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/455"
+}
