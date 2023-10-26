@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "invitedtea",
+  "risk": "3",
+  "title": " Based on the functionality, if the `releaseEscrow()` function can be called by unauthorized entities, it can lead to potential misuse or unintended transfer of assets.",
+  "issueId": 707,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/707"
+}
