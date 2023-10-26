@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "MiloTruck",
+  "risk": "3",
+  "title": "`createEscrow()` is called with arguments in the wrong order in `_blockAccount()` and `executeWithdrawal()`",
+  "issueId": 492,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/492"
+}
