@@ -7,7 +7,6 @@
 | 3.  |  Cache the length of the array in a variable to avoid reading it on every cycle to improve gas efficiency.  |
 | 4.  |  Ccache memory variable outside the cycle and just overwrite it in the cycle and avoid creating a new variable on every cycle to improve gas efficiency.  |
 | 5.  |  Use the declared returns variables to improve gas efficiency.  |
-| 6.  | Reorder the Struct declaration to improve gas efficiency.   |
 
 ### 1.- In cycles you can use ‘unchecked{++i;}’ instead of ‘i++’ to improve gas efficiency.
 
