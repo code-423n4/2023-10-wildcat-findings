@@ -105,7 +105,7 @@ This issue can be mitigated in several ways:
 [MarketControllerFactory Line 85](https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/WildcatMarketControllerFactory.sol#L85)
 
 **Issue Description:**
-The protocol allows borrowers to set a reserve ratio that they must maintain to avoid being charged a delinquency fee. In the current implementation, this parameter can be set to 100%, rendering the entire functionality redundant, as borrowers would not be able to withdraw any funds from the market.
+The protocol allows borrowers to set a reserve ratio that they must maintain to avoid being charged a delinquency fee. In the current implementation, this parameter can be set to 100%, rendering the entire functionality redundant, as borrowers would not be able to withdraw any funds from the market. Additionaly the market would fall into delinquency immediately after the start.
 
 **Recommended Mitigation Steps:**
 To mitigate this issue, modify the check on `maximumReserveRatioBips` to revert if `constraints.maximumReserveRatioBips >= 10000`.
@@ -118,7 +118,7 @@ To mitigate this issue, modify the check on `maximumReserveRatioBips` to revert 
 The `scaleFactor` of a market is multiplied by the fee rate to increase the scale. In a very rare edge case, where a market has a 100% interest (e.g., a junk bond) and is renewed each year with the borrower paying lenders the full interest, the scale factor would overflow after 256 years (as the scale factor doubles every year) when it attempts to increase during the withdrawal amount calculation.
 
 **Recommended Mitigation Steps:**
-While this issue is unlikely to occur in practice, a check should be added in the withdrawal process to prevent an overflow. If an overflow is detected, lenders should be forced to withdraw with a scale factor of `uint256.max`, and the borrower should close the market to enable borrowing again.
+While this issue is unlikely to occur in practice, a check should be added in the withdrawal process to prevent an overflow. If an overflow is detected, lenders should be forced to withdraw with a scale factor of `uint256.max`, and the borrower should close the market.
 
 ---
 ## [L-07]  Misleading ERC20 queries `balanceOf()` and `totalSupply()`
@@ -136,7 +136,7 @@ To address this issue, it is recommended to rename the existing functions to `ba
 [WildcatMarket Line 142](https://github.com/code-423n4/2023-10-wildcat/blob/main/src/market/WildcatMarket.sol#L142)
 
 **Issue Description:**
-Markets include a functionality where users can close markets directly, effectively transferring all funds back into the market and setting the `isClosed` parameter of the state to true. While this prevents new lenders from depositing into the market, it only allows lenders to withdraw their funds and interest. The issue is that, once a borrower uses this function, the market cannot be reopened. If the borrower wants to have another market for the same asset, they must deploy a new market with a new prefix to avoid salt collisions. If a lender does this often it might end up in the Market names looking like "CodearenaV1234.56DAI" due to new prefixes being needed each time. Additionally the markets list would get more and more bloated. 
+Markets include a functionality where users can close markets directly, effectively transferring all funds back into the market and setting the `isClosed` parameter of the state to true. While this prevents new lenders from depositing into the market, it only allows lenders to withdraw their funds and interest. The issue is that, once a borrower uses this function, the market cannot be reopened. If the borrower wants to have another market for the same asset, they must deploy a new market with a new prefix to avoid salt collisions. If a borrower does this often it might end up in the Market names looking like "CodearenaV1234.56DAI" due to new prefixes being needed each time. Additionally the markets list would get more and more bloated. 
 
 **Recommended Mitigation Steps:**
 To mitigate this issue, borrowers should be allowed to reset a market. This would require all lenders to withdraw their funds before the reset, but it would reset all parameters, including the scale factor, allowing the market to be restarted.
@@ -152,6 +152,37 @@ A malicious borrower could exploit this functionality to deploy markets for othe
 
 **Recommended Mitigation Steps:**
 The recommended solution for this is to let each borrower choose a borrower identifier (that gets issued to them by wildcat). This in the Code4rena example would be the "Code4rena" and "C4" strings. Now the hashes (hashes instead of strings to save gas on storage cost) of those identifiers get stored onchain whenever a new borrower gets added. Whenever Code4rena deploys a new market they pass their identifier as well as a chosen Postfix which would allow them to deploy multiple markets for the same asset (for example with different interest rates). The protocol then verifies if the identifiers match the hash and revert if that is not the case. The market mame would then for example look like this "Code4renaShortTermDAI".
+
+## [L-10] Interest continues to accrue up to the expiry.
+
+**Issue Description:**
+The whitepaper on page 12 states that interest ceases to be paid at the time when tokens get burned or when withdrawals are queued in the line "Interest ceases to be paid on Bob's deposit from the moment that the whcWETH tokens were burned, regardless of the length of the withdrawal cycle". However, the actual code behavior differs. In the Wildcat protocol's implementation, interest continues to accrue until the expiration of the withdrawal period, as evident in the code snippet below:
+
+```solidity
+if (state.hasPendingExpiredBatch()) {
+  uint256 expiry = state.pendingWithdrawalExpiry;
+  // Interest accrual only if time has passed since last update.
+  // This condition is only false when withdrawalBatchDuration is 0.
+  if (expiry != state.lastInterestAccruedTimestamp) {
+    (uint256 baseInterestRay, uint256 delinquencyFeeRay, uint256 protocolFee) = state
+      .updateScaleFactorAndFees(
+        protocolFeeBips,
+        delinquencyFeeBips,
+        delinquencyGracePeriod,
+        expiry
+      );
+    emit ScaleFactorUpdated(state.scaleFactor, baseInterestRay, delinquencyFeeRay, protocolFee);
+  }
+  _processExpiredWithdrawalBatch(state);
+}
+```
+
+**Recommended Mitigation Steps:**
+To address this issue, there are two potential courses of action:
+
+If the intended behavior is for interest to continue accruing until the withdrawal period expires, then the documentation should be updated to align with the current code behavior.
+
+If the documentation accurately reflects the intended interest-accrual behavior (i.e., interest should stop accruing when withdrawals are queued), then the conditional statement as shown in the code snippet should be removed from the function _getUpdatedState().
 
 # Non-Critical
 ## [NC-01]  Badly named constant `BIP`
