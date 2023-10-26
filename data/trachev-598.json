@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "trachev",
+  "risk": "3",
+  "title": "Malicious borrower can set annual interest rate to an insignificant amount without being sanctioned",
+  "issueId": 598,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/598"
+}
