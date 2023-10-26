@@ -10,7 +10,11 @@ Lenders are monitored using Chainalysis to avoid poisoning of the system.
 1. The most important trust aspect is kept off-chain. The agreements made by the participants and the judging system of the agreement will bear all the expect-able risks associated with off-chain entities.
 
 ## Centralization risks
-1. Apart from the entry to the system, the `archController` owner has the ability to remove a registered borrower. But this only disallows creation of new markets and doesn't interfere with the operations of already deployed markets. 
+1. Apart from the entry to the system, the `archController` owner has the ability to remove a registered borrower. But this only disallows creation of new markets and doesn't interfere with the operations of already deployed markets.
+2. The borrower has the ability to remove a lender from the lender anytime. But again the power is reduced so that the lender will always have the ability to withdraw already deposited funds.
+3. If a lender gets sanctioned by Chainalysis, unless the lender is unsanctioned on Chainalysis, the borrower can decide whether to allow the funds of the lender to be given to the lender. Note that the borrower is not free to use this funds. 
+
+
 
 ### Time spent:
 25 hours
