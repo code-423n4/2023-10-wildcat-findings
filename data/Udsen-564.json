@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE ERRORNEOUS REVERT MESSAGE IS READ FROM MEMORY IN THE `WildCatMarketController.enforceParameterConstraints` FUNCTION WHICH COULD BREAK THE OFF-CHAIN TOOL ANALYSIS AND SUBSEQUENT DECISION MAKING",
+  "issueId": 564,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/564"
+}
