@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "joaovwfreire",
+  "risk": "3",
+  "title": "## Borrowers can pretend to overcollateralize their loans with more than 90% reserve ratio and setAnnualInterestBips to a lower value and the market reserve ratio will drop to 90%",
+  "issueId": 383,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/383"
+}
