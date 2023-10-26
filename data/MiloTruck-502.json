@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "MiloTruck",
+  "risk": "2",
+  "title": "Withdrawals can get stuck if a market's asset reverts when `transfer()` is called with `amount > uint96`",
+  "issueId": 502,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/502"
+}
