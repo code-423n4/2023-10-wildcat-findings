@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "cryptothemex",
+  "risk": "2",
+  "title": "Solmate `safetransfer` and `safeTransferFrom` do not check the code size of the token address, which may lead to loss of funds",
+  "issueId": 649,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/649"
+}
