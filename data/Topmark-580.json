@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Topmark",
+  "risk": "3",
+  "title": "Decrepancy in Scale value to due round up would cause denial of Service at certain points",
+  "issueId": 580,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/580"
+}
