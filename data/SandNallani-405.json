@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "SandNallani",
+  "risk": "3",
+  "title": "The function nukeFromOrbit could potentially be front run by the sanctioned address to transfer out their assets.",
+  "issueId": 405,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/405"
+}
