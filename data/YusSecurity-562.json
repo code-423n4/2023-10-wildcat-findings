@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "YusSecurity",
+  "risk": "2",
+  "title": "`WildcatMarketToken` does not comply with the ERC20 standard",
+  "issueId": 562,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/562"
+}
