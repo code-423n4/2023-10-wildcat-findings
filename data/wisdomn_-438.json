@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "wisdomn_",
+  "risk": "3",
+  "title": "Function values can run out of gas, leading to a DOS",
+  "issueId": 438,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/438"
+}
