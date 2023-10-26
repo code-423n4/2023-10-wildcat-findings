@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "gizzy",
+  "risk": "3",
+  "title": "Any other person can withdraw from a market which breaks protocol Invariants that only approved lender and borrower can withdraw",
+  "issueId": 447,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/447"
+}
