@@ -206,3 +206,52 @@ The same issue occurs in:
 
 By definition - in FIFO Queue `startIndex <= nextIndex `, thus `uint256 len = nextIndex - startIndex` can be unchecked.
 
+
+# [G-10] Unnecessary variable declaration in `FIFOQueue.sol`
+
+[File: FIFOQueue.sol](https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/libraries/FIFOQueue.sol#L44-L45)
+```
+    uint256 nextIndex = arr.nextIndex;
+    uint256 len = nextIndex - startIndex;
+```
+
+Variable `nextIndex` is used only once, which means it doesn't need to be declared at all. Code can be changed to:
+```
+uint256 len = arr.nextIndex - startIndex;
+```
+
+[File: FIFOQueue.sol](https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/libraries/FIFOQueue.sol#L55-L59)
+```
+ function push(FIFOQueue storage arr, uint32 value) internal {
+    uint128 nextIndex = arr.nextIndex;
+    arr.data[nextIndex] = value;
+    arr.nextIndex = nextIndex + 1;
+  }
+```
+
+Function can be rewritten, so `nextIndex` will be redundant:
+
+```
+ function push(FIFOQueue storage arr, uint32 value) internal {
+   
+    arr.data[arr.nextIndex] = value;
+    ++arr.nextIndex;
+  }
+```
+
+# [G-11] In `FIFOQueue.sol` some additions can be changed to pre-increment
+
+[File: FIFOQueue.sol](https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/libraries/FIFOQueue.sol#L55-L59)
+```
+ function push(FIFOQueue storage arr, uint32 value) internal {
+    uint128 nextIndex = arr.nextIndex;
+    arr.data[nextIndex] = value;
+    arr.nextIndex = nextIndex + 1;
+  }
+```
+
+In function `push()`, we firstly assign `arr.nextIndex` to variable `nextIndex` and then we perform below addition: `arr.nextIndex = nextIndex + 1;`
+Since `(nextIndex = arr.nextIndex)`, then `(arr.nextIndex = nextIndex + 1) == (arr.nextIndex = arr.nextIndex + 1)  == (++arr.nextIndex)`.
+Thus we can change `arr.nextIndex = nextIndex + 1;` to `++arr.nextIndex ;`.
+
+The same issue occurs in function `shift()`. `arr.startIndex = startIndex + 1;` can be changed to `++arr.startIndex;`
