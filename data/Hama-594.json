@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Hama",
+  "risk": "2",
+  "title": "Potential Reversion in closeMarket due to Insufficient Borrower's Balance",
+  "issueId": 594,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/594"
+}
