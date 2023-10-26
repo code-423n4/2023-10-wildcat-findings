@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "CaeraDenoir",
+  "risk": "2",
+  "title": "closeMarket() can only be called by the market controller but the controller has no function to close a market.",
+  "issueId": 645,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/645"
+}
