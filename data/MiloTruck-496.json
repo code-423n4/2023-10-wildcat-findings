@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "MiloTruck",
+  "risk": "2",
+  "title": "`setAnnualInterestBips()` allows borrowers to set a market's annual interest rate outside protocol limits",
+  "issueId": 496,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/496"
+}
