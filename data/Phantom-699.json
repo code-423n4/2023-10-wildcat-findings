@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Phantom",
+  "risk": "2",
+  "title": "The operation of the approve function in the WildcatMarketToken.sol file is invalid.",
+  "issueId": 699,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/699"
+}
