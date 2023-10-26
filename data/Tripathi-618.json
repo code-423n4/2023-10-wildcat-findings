@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Tripathi",
+  "risk": "3",
+  "title": "If feeRecipient gets blacklisted by asset protocol won't able to collect fees due to immutable nature of feeRecipient",
+  "issueId": 618,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/618"
+}
