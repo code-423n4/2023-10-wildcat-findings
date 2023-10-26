@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "MiloTruck",
+  "risk": "2",
+  "title": "`setAnnualInterestBips()` can be abused to keep a market's reserve ratio at 90%",
+  "issueId": 497,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/497"
+}
