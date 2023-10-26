@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE RETURN VALUE OF THE `_deployedControllers.add(controller)` CALL IS NOT CHECKED FOR SUCCESS IN THE `WildcatMarketControllerFactory.deployController` FUNCTION WHICH PUTS THE CONTRACT INTO AN ERRORNEOUS AND UNDESIRABLE STATE",
+  "issueId": 561,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/561"
+}
