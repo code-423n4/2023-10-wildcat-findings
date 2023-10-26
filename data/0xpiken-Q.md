@@ -87,3 +87,18 @@ Change codes as below:
     emit Transfer(from, to, amount);
   }
 ```
+
+## [04] Duplicate functions `calculateLinearInterestFromBips` appear in [MathUtils.sol](https://github.com/code-423n4/2023-10-wildcat/blob/main/src/libraries/MathUtils.sol#L30-L39) and [FeeMath.sol](https://github.com/code-423n4/2023-10-wildcat/blob/main/src/libraries/FeeMath.sol#L19-L28).
+Remove the copy in [MathUtils.sol](https://github.com/code-423n4/2023-10-wildcat/blob/main/src/libraries/MathUtils.sol#L30-L39):
+```diff
+- function calculateLinearInterestFromBips(
+-   uint256 rateBip,
+-   uint256 timeDelta
+- ) internal pure returns (uint256 result) {
+-   uint256 rate = rateBip.bipToRay();
+-   uint256 accumulatedInterestRay = rate * timeDelta;
+-   unchecked {
+-     return accumulatedInterestRay / SECONDS_IN_365_DAYS;
+-   }
+- }
+```
