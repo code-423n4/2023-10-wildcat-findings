@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "MiloTruck",
+  "risk": "2",
+  "title": "Markets cannot be deployed for ERC20 tokens where `name()` or `symbol()` is an empty/large string",
+  "issueId": 494,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/494"
+}
