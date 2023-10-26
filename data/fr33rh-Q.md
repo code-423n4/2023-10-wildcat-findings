@@ -9,6 +9,5 @@ Now there are 101 `Batch` in the FIFOQueue `unpaidBatches`.
 
 Now let's analyze the current situation:
 - Alice does not need do anything,she can throw away this little bit of assets.
-- The borrower has to manual call the `function processUnpaidWithdrawalBatch()` 101 times,otherwise he will continue to pay the interest of Bob's 200ETH.
-The borrower can't use this money `200ETH`, and the reserve ratio of the market does not factor it in.
+- The borrower has to manual call the `function processUnpaidWithdrawalBatch()` 101 times,otherwise he will continue to pay the interest of Bob's 200ETH.(The borrower can't use this money `200ETH`, and the reserve ratio of the market does not factor it in.)
 - Bob also has to manual call the `function processUnpaidWithdrawalBatch()` 101 times if him want to claim his `200WETH`.
