@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Robert",
+  "risk": "2",
+  "title": "safeTransferFrom Does Not Check for Code at the Token Address",
+  "issueId": 676,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/676"
+}
