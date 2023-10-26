@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "SpicyMeatball",
+  "risk": "3",
+  "title": "Lack of closeMarket() function implementation in the market controller",
+  "issueId": 535,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/535"
+}
