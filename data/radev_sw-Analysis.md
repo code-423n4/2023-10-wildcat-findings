@@ -54,6 +54,7 @@
 
 - **Sanctioned Addresses:** Addresses flagged as sanctioned by Chainalysis are blocked from interacting with markets. A "nukeFromOrbit" function allows for the transfer of their balances into an escrow contract, which can be retrieved under specific conditions.
 
+- **A borrower deploying a market with a `base APR of 10%`, a `protocol APR of 30%`, a `penalty APR of 20%` will pay a true APR of 13% (10% + (10% * 30%)) under normal circumstances and 33% when the market has been delinquent for long enough for the penalty APR to activate. The 30% protocol APR is calculated as 30% of the base APR, so 30% of 10% = 3%  (10% base, 3% protocol)**
 
 ---
 
@@ -130,7 +131,7 @@ struct MarketState {
 
 # 3. Code Audit Approach
 
-After first reading the protocol documentation in the "README.md" file, these possible attack vectors popped into my head:
+### After first reading the protocol documentation in the "README.md" file, these possible attack vectors popped into my head:
 
 1. **Can the market enter the "Penalty APR" even if the "reserve ratio" is not actually broken?**
 
@@ -168,6 +169,16 @@ Protocol Assumptions:
   - Can add or remove controller factories to/from the ArchController, dictating who can deploy controllers and markets. 
 - Borrower Actions:
   - Can add or remove lenders to/from controllers, permitting them to deposit into markets or restricting their ability to deposit further if they have already deposited before.
+
+### Attacks discussed during the Audit:  
+- Is it possible for lenders to accrue additional interest or withdraw funds again after a full or partial withdrawal?
+- Which state variables responsible for lenders, depositors, or borrowers undergo changes during non-static function calls, and what potential pitfalls could arise from these changes?
+- Can lenders or depositors potentially lose their scoringBalance or market tokens in any way?
+- How might the protocol's functions be exploited to cause unexpected denial-of-service (DoS) scenarios, potentially due to improper checks or erroneous protocol assumptions?
+- Changing variables that play a crucial role in protocol calculations typically leads to errors; what safeguards are in place to prevent this?
+- Let's explore a hypothetical scenario of expected code logic and consider how it could be compromised by testing various scenarios to break it.
+- In a protocol with multiple user roles, are there checks in place to ensure that functions designed for specific roles cannot be accessed by unauthorized roles?
+- How should borrowers deposit assets to fulfill lender withdrawal requests? Is there a dedicated function for this, or do borrowers need to transfer assets to the market manually?
 
 ---
 
@@ -285,6 +296,8 @@ The WildCat Protocol, like any financial system, has its fair share of potential
 8. **Connected to Other Protocols:**
    - DeFi protocols often interact with each other. If one protocol has problems, it can affect others in a chain reaction.
    - Safety Measures: Doing thorough checks on connected protocols, having ways to pause operations, and having plans for emergencies can minimize risks from interconnectedness.
+
+
 
 ### Time spent:
 20 hours
