@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xmuxyz",
+  "risk": "2",
+  "title": "Missing to track two more state changes when unblocking an existing blocked-lender",
+  "issueId": 385,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/385"
+}
