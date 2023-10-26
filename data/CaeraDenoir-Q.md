@@ -3,7 +3,7 @@
 These QA Findings are based on markets set on specific conditions by the borrower, allowing some bad-faith borrowers to bypass some market configs. (Not listing a full 100% borrow by a bad-faith borrower here since it is of a higher severity, even though it is based on the same principles of a bad-faith borrower)
 
 ## First QA Finding
-### Borrower is able to use setAnnualInterestBips to skew the Reserve Ratio
+### Borrower is able to use `setAnnualInterestBips` to skew the Reserve Ratio
 
 The logic behind is: a borrower can deploy a market with a high Reserve ratio, then call setAnnualInterestBips to lower the ratio and be able to get access to more asset without making the market delinquent.
 
@@ -12,7 +12,7 @@ The logic behind is: a borrower can deploy a market with a high Reserve ratio, t
 A function in src/WildcatMarketController.sol
 
 
-```
+```sol
 function setAnnualInterestBips(
     address market,
     uint16 annualInterestBips
@@ -40,7 +40,7 @@ When the borrower changes the annual interest, the function checks if the rate i
 
 This behavior can be exploited by a bad borrower, by attracting lenders with a very high reserve ratio, and then lowering it by using the function.
 
-It is worth to consider that the bad actor can in fact promise a high Annual Interest with a high reserve ratio, and benefit both from lowering the interest and being able to borrow more of the asset lended.
+It is worth to take into consideration that the bad actor can in fact promise a high Annual Interest with a high reserve ratio, and benefit both from lowering the interest and being able to borrow more of the asset lended.
 
 ### Example
 Assume a new market is deployed, Ana is an approved lender, the reserve ratio is 99%, and has a 10% Annual Interest Rate.
@@ -70,9 +70,9 @@ This is a very niche situation that compromises lender assets, but there are a l
 
 
 ## Second QA Finding
-### Borrower is able to use setAnnualInterestBips to borrow at a lower interest.
+### Borrower is able to use `setAnnualInterestBips` to borrow at a lower interest.
 
-The logic behind is: a borrower can deploy a market with a high base Interest and a low delinquent interest, then borrow a whatever is allowed by the Reserve Rate follower by a setAnnualInterestBips call to lower the base Interest.
+The logic behind is: a borrower can deploy a market with a high base Interest and a low delinquent interest, then borrow whatever is allowed by the Reserve Rate follower by a setAnnualInterestBips call to lower the base Interest.
 #### Code Involved
 
 A function in src/WildcatMarketController.sol
@@ -104,7 +104,7 @@ function setAnnualInterestBips(
 ###  Explanation
 When the borrower changes the annual interest while borrowing asset, it is possible for the new Annual Interest rate + Deliquency rate to be lower than the promised % for the lenders, and by being delinquent the lenders are unable to exit either.
 
-It is worth to consider that this behavior makes the market go delinquent, so it raises some flags instantly.
+It is worth considering that this behavior makes the market go delinquent, so it raises some flags instantly.
 
 ### Example
 Assume a new market is deployed, Ana is an approved lender, the reserve ratio is 20%, and has a 30% Annual Interest Rate with a 10% Delinquent Rate.
@@ -144,7 +144,7 @@ Market: Delinquent
 
 
 ### Recommendation
-There are a few ways to solve this issue. I would advise to not allow the borrower to lower the Interest if the market would enter delinquency after the function call.
+There are a few ways to solve this issue. I would advise not to allow the borrower to lower the Interest if the market would enter delinquency after the function call.
 
 ### Severity: Low
 This is a very niche situation that compromises lender interest, but there are a lot of things that must align for this to be possible, and should in theory be covered by other off-chain methods.
