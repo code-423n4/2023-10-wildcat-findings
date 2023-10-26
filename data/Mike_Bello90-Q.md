@@ -25,7 +25,7 @@ using an Enumerable set can cause a Dos in the contract if the set grows large e
 * uncallable if the set grows to a point where copying to memory consumes too much gas to fit in a block.
 */
 function _values(Set storage set) private view returns (bytes32[] memory) {
-return set._values;
+    return set._values;
 }
 ```
 
@@ -72,22 +72,23 @@ for example, you can add an event in the function that deploys a market controll
 
 ```solidity
 function deployController() public returns (address controller) {
-if (!archController.isRegisteredBorrower(msg.sender)) {
-revert NotRegisteredBorrower();
-}
+    if (!archController.isRegisteredBorrower(msg.sender)) {
+        revert NotRegisteredBorrower();
+    }
 
 
-_tmpMarketBorrowerParameter = msg.sender;
-// Salt is borrower address
-bytes32 salt = bytes32(uint256(uint160(msg.sender)));
-controller = LibStoredInitCode.calculateCreate2Address(ownCreate2Prefix, salt, controllerInitCodeHash);
-if (controller.codehash != bytes32(0)) {
-revert ControllerAlreadyDeployed();
-}
-LibStoredInitCode.create2WithStoredInitCode(controllerInitCodeStorage, salt);
-_tmpMarketBorrowerParameter = address(1);
-archController.registerController(controller);
-_deployedControllers.add(controller);
+    _tmpMarketBorrowerParameter = msg.sender;
+    // Salt is borrower address
+    bytes32 salt = bytes32(uint256(uint160(msg.sender)));
+    controller = LibStoredInitCode.calculateCreate2Address(ownCreate2Prefix, salt,                 
+    controllerInitCodeHash);
+    if (controller.codehash != bytes32(0)) {
+       revert ControllerAlreadyDeployed();
+    }
+   LibStoredInitCode.create2WithStoredInitCode(controllerInitCodeStorage, salt);
+   _tmpMarketBorrowerParameter = address(1);
+   archController.registerController(controller);
+  _deployedControllers.add(controller);
 }
 ```
 https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/WildcatMarketControllerFactory.sol#L282
@@ -110,18 +111,17 @@ for example, in the values function of the FifoQueue library you don’t need to
 
 ```solidity
 function values(FIFOQueue storage arr) internal view returns (uint32[] memory _values) {
-uint256 startIndex = arr.startIndex;
-uint256 nextIndex = arr.nextIndex;
-uint256 len = nextIndex - startIndex;
-_values = new uint32[](len);
+    uint256 startIndex = arr.startIndex;
+    uint256 nextIndex = arr.nextIndex;
+    uint256 len = nextIndex - startIndex;
+    _values = new uint32[](len);
 
 
-for (uint256 i = 0; i < len; i++) {
-_values[i] = arr.data[startIndex + i];
-}
+    for (uint256 i = 0; i < len; i++) {
+        _values[i] = arr.data[startIndex + i];
+    }
 
-
-return _values; // @note no es necesario usar la palabra return cuando ya declaraste la variable en returns
+    return _values; 
 }
 ```
 GitHub link:
