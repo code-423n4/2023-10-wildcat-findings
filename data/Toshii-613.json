@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Toshii",
+  "risk": "2",
+  "title": "Borrower can abuse `setAnnualInterestBips` to set an interest rate lower than the minimum allowable (`minimumAnnualInterestBips`)",
+  "issueId": 613,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/613"
+}
