@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Infect3d",
+  "risk": "3",
+  "title": "Almost all functions of a Market can be DoS'd with stuck funds if the chosen asset uses high decimals or has a low numerary value due to an overflow",
+  "issueId": 596,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/596"
+}
