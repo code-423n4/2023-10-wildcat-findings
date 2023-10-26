@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Inspecktor",
+  "risk": "3",
+  "title": "If createEscrow() fails, the user will lose funds when executing WildcatMarketWithdrawals.executeWithdrawal()",
+  "issueId": 557,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/557"
+}
