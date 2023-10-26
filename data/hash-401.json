@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "hash",
+  "risk": "3",
+  "title": "Markets cannot be closed due to the `onlyController` modifier ",
+  "issueId": 401,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/401"
+}
