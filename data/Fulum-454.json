@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Fulum",
+  "risk": "2",
+  "title": "Lack of verifications for market deployment can lead to impossibility to queue withdrawal and repayment for lenders.",
+  "issueId": 454,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/454"
+}
