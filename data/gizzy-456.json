@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "gizzy",
+  "risk": "2",
+  "title": "The setAnnualInterestBips can be use to break protocol invarient  of minAnnualInterestBips or maximumAnnualInterestBips if not 0 or 10000",
+  "issueId": 456,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/456"
+}
