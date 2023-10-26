@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "circlelooper",
+  "risk": "3",
+  "title": "Should add functionality in WildcatMarketController.sol so that borrower can close market",
+  "issueId": 388,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/388"
+}
