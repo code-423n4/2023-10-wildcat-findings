@@ -43,6 +43,14 @@ In WildcatMarket instances, the borrower has complete control over the addresses
 
 Consider preventing the borrower from adding themselves as lender in `WildcatMarketController` or `WildcatMarket`.
 
+## [L-06] Market allows changing the annual rate after it's when in closed state
+
+https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/market/WildcatMarketConfig.sol#L149
+
+After a borrower closed a WildcatMarket (`state.isClosed = true`), the market's annual interest is set to zero. It is however possible to change it to a different value throught a `setAnnualInterestBips` call.
+
+Consider checking for market state within the `setAnnualInterestBips` function.
+
 ## [N-01] Underflow protection produces obscure error messages
 
 https://github.com/code-423n4/2023-10-wildcat/blob/c5df665f0bc2ca5df6f06938d66494b11e7bdada/src/market/WildcatMarketWithdrawals.sol#L89
