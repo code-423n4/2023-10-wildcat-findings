@@ -90,7 +90,7 @@ Recommendations:
 - `WildcatMarketControllerFactory.t` does not test the deployment of new controllers at all
 - The testuite is lacking unit tests for getter functions
 - The `BoolUtils.sol` library is not tested at all
-- The testsuite does not include any fuzz testcases
+- The testsuite should include more fuzztests to test edge cases
 
 ## Systemic Risk
 The protocol team has chosen very well in keeping the protocol as hands off as possible. The current implementation limits the damage in case of the archcontroller / owner becoming corrupted. Still, the archcontroller is currently a single point of failure which, if corrupted, allows an attacker to remove borrowers and make them incapable of deploying new markets, effectively freezing the current protocol structure. Nevertheless this would not result in big issues for the end users, due to the hands off setup of the archcontroller.
@@ -106,6 +106,8 @@ The audit spanned a full ten days and comprised three phases:
 - Day 10: Reporting findings, including bug reports and this comprehensive analysis.
 
 Total time spent: 35 hours.
+
+
 
 ### Time spent:
 35 hours
