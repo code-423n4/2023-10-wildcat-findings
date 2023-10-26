@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "d3e4",
+  "risk": "2",
+  "title": "Swapped parameters when calling `createEscrow()`",
+  "issueId": 689,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/689"
+}
