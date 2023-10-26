@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Yanchuan",
+  "risk": "3",
+  "title": "Asset is not transferred back to the lender's account when lender is removed from sanction list.",
+  "issueId": 521,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/521"
+}
