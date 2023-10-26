@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xkazim",
+  "risk": "2",
+  "title": "borrowers did not have the ability to remove the blocked address in their markets because of `_getAccount` function",
+  "issueId": 611,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/611"
+}
