@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "serial-coder",
+  "risk": "2",
+  "title": "The down of Chainalysis's SanctionsList leads to the malfunctioning of Wildcat's functions",
+  "issueId": 614,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/614"
+}
