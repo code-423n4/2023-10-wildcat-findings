@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "DeFiHackLabs",
+  "risk": "2",
+  "title": "nukeFromOrbit() will always revert if borrower calls overrideSanction() manually",
+  "issueId": 579,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/579"
+}
