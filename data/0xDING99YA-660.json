@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "0xDING99YA",
+  "risk": "3",
+  "title": "Borrower repay the debt by directly transferring the asset, this behavior can result in an incorrect calculation of borrower delinquent status",
+  "issueId": 660,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/660"
+}
