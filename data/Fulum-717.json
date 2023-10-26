@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "Fulum",
+  "risk": "2",
+  "title": "Unfair APR penalty can be added for the borrower when the underlying ERC20 token is paused.",
+  "issueId": 717,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/717"
+}
