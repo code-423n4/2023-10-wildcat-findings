@@ -1,0 +1,8 @@
+{
+  "contest": 296,
+  "handle": "QiuhaoLi",
+  "risk": "3",
+  "title": "Lenders can leverage the rounding up in depositUpTo/scaleAmount/rayDiv to steal assets from market",
+  "issueId": 423,
+  "issueUrl": "https://github.com/code-423n4/2023-10-wildcat-findings/issues/423"
+}
