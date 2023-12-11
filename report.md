@@ -2617,10 +2617,9 @@ In `setAnnualInterestBips()`, consider setting the market's reserve ratio to 90%
 > 
 > We've implemented this over the course of a few commits, final result is shown below -
 > 
-> ![image](https://github-production-user-asset-6210df.s3.amazonaws.com/135237830/289646754-c03fa07f-b386-4f7d-9ce7-5d0d542c055a.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20231211%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231211T192645Z&X-Amz-Expires=300&X-Amz-Signature=b27aabf3185df8f67e9a7aabd62d645b4cf7fcb7f440166ca828fda587d52bfa&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=0)
+> ![image](https://gist.github.com/assets/135237830/9759f3bc-46a9-4191-882c-3c3cbedffed7)
 >
-> ![image](https://github-production-user-asset-6210df.s3.amazonaws.com/135237830/289646804-dc2e6016-dbba-4e7e-b898-a0fb09a29b66.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20231211%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231211T192749Z&X-Amz-Expires=300&X-Amz-Signature=5ccc433a7f3875e71fcf06c7b6576e7c75c3ca1e73385f67911646125380144e&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=0)
-
+> ![image](https://gist.github.com/assets/135237830/74aa79f5-a3b1-45bd-aa61-a5ffdb607b77)
 
 **[0xTheC0der (judge) commented](https://github.com/code-423n4/2023-10-wildcat-findings/issues/497#issuecomment-1804305663):**
  > I understand the sponsor's dissatisfaction about those findings and appreciate the insightful comment, as well as the proposed formula which would avoid the issue. However, it's my duty to judge the issues with respect to this audit's codebase (source of truth).
