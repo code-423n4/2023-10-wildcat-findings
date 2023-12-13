@@ -2617,9 +2617,9 @@ In `setAnnualInterestBips()`, consider setting the market's reserve ratio to 90%
 > 
 > We've implemented this over the course of a few commits, final result is shown below -
 > 
-> ![image](https://gist.github.com/assets/135237830/9759f3bc-46a9-4191-882c-3c3cbedffed7)
+> ![image](https://github-production-user-asset-6210df.s3.amazonaws.com/135237830/289665505-9759f3bc-46a9-4191-882c-3c3cbedffed7.png)
 >
-> ![image](https://gist.github.com/assets/135237830/74aa79f5-a3b1-45bd-aa61-a5ffdb607b77)
+> ![image](https://github-production-user-asset-6210df.s3.amazonaws.com/135237830/289665636-74aa79f5-a3b1-45bd-aa61-a5ffdb607b77.png)
 
 **[0xTheC0der (judge) commented](https://github.com/code-423n4/2023-10-wildcat-findings/issues/497#issuecomment-1804305663):**
  > I understand the sponsor's dissatisfaction about those findings and appreciate the insightful comment, as well as the proposed formula which would avoid the issue. However, it's my duty to judge the issues with respect to this audit's codebase (source of truth).
